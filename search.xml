@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[dns验证方式使用letsencrypt证书]]></title>
     <url>%2F2018%2F02%2F01%2F3-letsencrypt-acme-sh%2F</url>
-    <content type="text"><![CDATA[安装acme.sh自动安装到~/.acme.sh/文件夹,会创建crontab，检测证书是否过期1curl https://get.acme.sh | sh开启脚本自动更新1acme.sh --upgrade --auto-upgrade生成证书使用阿里云解析api自动添加txt解析记录123export Ali_Key="***"export Ali_Secret="***"acme.sh --issue --dns dns_ali -d example.com解析生效后重新生成证书1acme.sh --renew -d example.com安装证书1234acme.sh --installcert -d example.com \ --key-file /home/&lt;id&gt;/letsencrypt/&lt;id&gt;.key \ --fullchain-file /home/&lt;id&gt;/letsencrypt/&lt;id&gt;.cer \ --reloadcmd "service nginx force-reload"nginx更改配置ssl_certificate 对应 fullchain-filessl_certificate_key 对应 –key-file1service nginx reload链接acme.shssllabsdns查询aliyun密钥]]></content>
+    <content type="text"><![CDATA[全站HTTPS支持安装acme.sh自动安装到~/.acme.sh/文件夹,会创建crontab，检测证书是否过期1curl https://get.acme.sh | sh开启脚本自动更新1acme.sh --upgrade --auto-upgrade生成证书使用阿里云解析api自动添加txt解析记录123export Ali_Key="***"export Ali_Secret="***"acme.sh --issue --dns dns_ali -d example.com解析生效后重新生成证书1acme.sh --renew -d example.com安装证书1234acme.sh --installcert -d example.com \ --key-file /home/&lt;id&gt;/letsencrypt/&lt;id&gt;.key \ --fullchain-file /home/&lt;id&gt;/letsencrypt/&lt;id&gt;.cer \ --reloadcmd "service nginx force-reload"nginx更改配置ssl_certificate 对应 fullchain-filessl_certificate_key 对应 –key-file1service nginx reload链接acme.shssllabsdns查询aliyun密钥]]></content>
       <categories>
         <category>ssl</category>
       </categories>
