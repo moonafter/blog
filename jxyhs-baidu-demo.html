@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=QzxKOlsYH2MlqAIaDS1AEhFmwvymqlRg"></script>
+    <title>地图展示</title>
+</head>
+<body>
+    <div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    // 百度坐标
+    var point0 = new BMap.Point(115.928614,27.977319);  //中心点
+    var point1 = new BMap.Point(116.156346,28.34574);	//进贤养护所
+    var point2 = new BMap.Point(116.035085,28.805284);	//南新养护站
+    var point3 = new BMap.Point(116.284881,28.048271);	//临川养护站
+    var point4 = new BMap.Point(115.8309,27.99897);	//洛市养护站
+    var point5 = new BMap.Point(116.19117,27.589782);	//宜黄养护站
+    var point6 = new BMap.Point(115.290875,27.224466);	//乌江养护站
+
+    // 初始化
+    var map = new BMap.Map("allmap", {minZoom:9,maxZoom:16});
+    map.centerAndZoom(point0,9);
+    map.enableScrollWheelZoom(true);
+
+    // 添加控件
+    function ZoomControl(){
+    this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+    this.defaultOffset = new BMap.Size(10, 10);
+    }
+    ZoomControl.prototype = new BMap.Control();
+    ZoomControl.prototype.initialize = function(map){
+        var div = document.createElement("div");
+        div.appendChild(document.createTextNode("进贤养护所"));
+        // 设置样式
+        div.style.cursor = "pointer";
+        div.style.border = "2px solid white";
+        div.style.color = "#FFFFFF";
+        div.style.backgroundColor = "red";
+        // 绑定事件
+        div.onclick = function(e){
+            map.centerAndZoom(point0,9);
+        }
+        // 添加DOM元素到地图中
+        map.getContainer().appendChild(div);
+        // 将DOM元素返回
+        return div;
+    }
+    // 创建控件
+    var myZoomCtrl = new ZoomControl();
+    map.addControl(myZoomCtrl);
+
+    // 添加点标注
+    function attribute(e){
+	var p = e.target;
+	map.centerAndZoom(p.getPosition(),16); 
+    }
+
+    var marker1 = new BMap.Marker(point1);
+    var label1= new BMap.Label("进贤养护所",{offset:new BMap.Size(20,-10)});
+    marker1.setLabel(label1);
+    marker1.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+    marker1.addEventListener("click",function(){
+        map.centerAndZoom(point1,16);
+        var content1 = 
+            "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>进贤养护所</h4>" + 
+            "<img style='float:right;margin:4px' id='imgDemo' src='https://ccq.oss-cn-qingdao.aliyuncs.com/images/jxyhs-min.jpg' width='139' height='104' title='进贤养护所'/>" + 
+            "<p style='margin:0;line-height:1.5;font-size:13px'>地址：江西省进贤县沥背陈家</p>" + 
+            "</div>";
+        var infoWindow = new BMap.InfoWindow(content1);
+        this.openInfoWindow(infoWindow);
+        document.getElementById('imgDemo').onload = function (){
+            infoWindow.redraw(); 
+        }
+    });
+    map.addOverlay(marker1);		//添加点1
+
+    var marker2 = new BMap.Marker(point2);
+    var label2 = new BMap.Label("南新养护站",{offset:new BMap.Size(20,-10)});
+    marker2.setLabel(label2);
+    marker2.addEventListener("click",attribute);
+    map.addOverlay(marker2);		//添加点2
+
+    var marker3 = new BMap.Marker(point3);
+    var label3 = new BMap.Label("临川养护站",{offset:new BMap.Size(20,-10)});
+    marker3.setLabel(label3);
+    marker3.addEventListener("click",attribute);
+    map.addOverlay(marker3);		//添加点3
+
+    var marker4 = new BMap.Marker(point4);
+    var label4 = new BMap.Label("洛市养护站",{offset:new BMap.Size(20,-10)});
+    marker4.setLabel(label4);
+    marker4.addEventListener("click",attribute);
+    map.addOverlay(marker4);		//添加点4
+
+    var marker5 = new BMap.Marker(point5);
+    var label5 = new BMap.Label("宜黄养护站",{offset:new BMap.Size(20,-10)});
+    marker5.setLabel(label5);
+    marker5.addEventListener("click",attribute);
+    map.addOverlay(marker5);		//添加点5
+
+    var marker6 = new BMap.Marker(point6);
+    var label6 = new BMap.Label("乌江养护站",{offset:new BMap.Size(20,-10)});
+    marker6.setLabel(label6);
+    marker6.addEventListener("click",attribute);
+    map.addOverlay(marker6);		//添加点6
+</script>
